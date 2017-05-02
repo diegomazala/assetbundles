@@ -11,13 +11,16 @@ public class SkyboxManager : MonoBehaviour
     public float blendTimeSeconds = 1.0f;
     public Material fadeMaterial;
 
-    public int index = 0;
+    public int skyboxIndex = 0;
     public List<Material> skybox;
 
     public string[] assetNames;
 
     public AssetBundleManifest assetBundleManifest;
+
+
     public UnityEngine.UI.Text screenText;
+
 
     void Start()
     {
@@ -53,6 +56,7 @@ public class SkyboxManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                skyboxIndex = ++skyboxIndex % skybox.Count;
                 ExecuteSkyboxSwitcher();
             }
         }
@@ -75,8 +79,6 @@ public class SkyboxManager : MonoBehaviour
 
     IEnumerator ExecuteBlend(float seconds)
     {
-        index = ++index % skybox.Count;
-
         float half_seconds = seconds;
 
         float alpha = fadeMaterial.color.a;
@@ -93,7 +95,7 @@ public class SkyboxManager : MonoBehaviour
             yield return null;
         }
 
-        RenderSettings.skybox = skybox[index];
+        RenderSettings.skybox = skybox[skyboxIndex];
 
         yield return null;
 
@@ -165,6 +167,7 @@ public class SkyboxManager : MonoBehaviour
                 {
                     assetBundleManifest = bundle.LoadAsset<AssetBundleManifest>("assetbundlemanifest");
                     assetNames = assetBundleManifest.GetAllAssetBundles();
+                    
                 }
             }
         }
@@ -178,10 +181,13 @@ public class SkyboxManager : MonoBehaviour
             Debug.Log(Time.frameCount + " Time foreach out 1 : " + Time.realtimeSinceStartup);
             yield return StartCoroutine(DownloadAssetBundle(assetBundleFolderUrl + "/" + bundleName));
             Debug.Log(Time.frameCount + " Time foreach out 2 : " + Time.realtimeSinceStartup);
+
+            skyboxIndex = skybox.Count - 1;
             ExecuteSkyboxSwitcher();
         }
 
         if (screenText != null)
             screenText.text = "";
     }
+
 }
