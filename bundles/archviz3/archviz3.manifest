@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 2214958756
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: bathroom
+      Dependencies: {}
+    Info_1:
+      Name: office
+      Dependencies: {}
+    Info_2:
+      Name: livingroom
+      Dependencies: {}
