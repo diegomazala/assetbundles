@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2289224455
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: skybox_rio.unity3d
+      Dependencies: {}
