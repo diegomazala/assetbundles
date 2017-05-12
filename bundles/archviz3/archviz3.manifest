@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 185919155
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: kitchen.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: bathroom.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: livingroom.unity3d
+      Dependencies: {}

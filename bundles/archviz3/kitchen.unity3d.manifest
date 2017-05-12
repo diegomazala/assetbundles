@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 4236061320
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 60a9aa16a6931d95622d8de3da403d60
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2647da76b7c2a83bec3b2e630339714c
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+Assets:
+- Assets/ArchViz/ArchViz3/House Office.mat
+Dependencies: []

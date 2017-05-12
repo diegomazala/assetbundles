@@ -47,7 +47,7 @@ public class SkyboxManager : MonoBehaviour
         RenderSettings.skybox = null;
     }
 
-	void Update ()
+    void Update()
     {
         //
         // For Windows
@@ -56,24 +56,35 @@ public class SkyboxManager : MonoBehaviour
             Application.platform == RuntimePlatform.WebGLPlayer ||
             Application.platform == RuntimePlatform.WindowsEditor)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow))
             {
-                ExecuteSkyboxSwitcher();
+                NextSkybox();
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                PrevSkybox();
             }
         }
 
 
     }
 
-    public void ExecuteSkyboxSwitcher()
+    public void NextSkybox()
     {
+        index = ++index % skybox.Count;
+        StartCoroutine(ExecuteBlend(blendTimeSeconds));
+    }
+
+    public void PrevSkybox()
+    {
+        --index;
+        if (index < 0)
+            index = skybox.Count - 1;
         StartCoroutine(ExecuteBlend(blendTimeSeconds));
     }
 
     IEnumerator ExecuteBlend(float seconds)
     {
-        index = ++index % skybox.Count;
-
         float half_seconds = seconds;
 
         float alpha = fadeMaterial.color.a;
@@ -141,7 +152,7 @@ public class SkyboxManager : MonoBehaviour
                 foreach (string sub_bundle_name in assetBundleManifest.GetAllAssetBundles())
                 {
                     yield return StartCoroutine(DownloadSkyboxMaterialAssetBundle(assetBundleFolderUrl + "/" + sub_bundle_name));
-                    ExecuteSkyboxSwitcher();
+                    NextSkybox();
                 }
 
                 bundle.Unload(false);
