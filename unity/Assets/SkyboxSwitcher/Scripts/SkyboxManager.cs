@@ -17,7 +17,7 @@ public class SkyboxManager : MonoBehaviour
 
     public string[] assetNames;
 
-    public AssetBundleManifest assetBundleManifest;
+    private AssetBundleManifest assetBundleManifest;
 
 
     public UnityEngine.UI.Text screenText;
@@ -126,6 +126,14 @@ public class SkyboxManager : MonoBehaviour
         string assetBundleUrl = assetBundleFolderUrl + "/" + assetBundleName;
         UnityWebRequest www = UnityWebRequest.GetAssetBundle(assetBundleUrl);
         yield return www.Send();
+
+        while (!www.downloadHandler.isDone)
+        {
+            screenText.text = (www.downloadProgress * 100.0f).ToString() + "%";
+            yield return null;
+        }
+
+        screenText.enabled = false;
 
         if (www.isError)
         {
