@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class SkyboxManager : MonoBehaviour
 {
-    
     public string AssetBundleFolderUrl;
     public string AssetBundleName;
     public Camera mainCamera;
@@ -20,8 +19,15 @@ public class SkyboxManager : MonoBehaviour
     private AssetBundleManifest assetBundleManifest;
 
 
-    public UnityEngine.UI.Text screenText;
-    
+    public SkyboxManagerUI ui;
+
+
+
+    public void Reload()
+    {
+        skybox.Clear();
+        StartCoroutine(DownloadSkyboxAssetBundle(AssetBundleFolderUrl, AssetBundleName));
+    }
 
     void Start()
     {
@@ -34,12 +40,12 @@ public class SkyboxManager : MonoBehaviour
             enabled = false;
         }
 
+        
 
-        skybox.Clear();
-        if (screenText != null)
-            screenText.text = "Loading...";
+        if (ui.screenText != null)
+            ui.screenText.text = "Loading...";
 
-        StartCoroutine(DownloadSkyboxAssetBundle(AssetBundleFolderUrl, AssetBundleName));
+        Reload();
     }
 	
     void OnDisable()
@@ -47,27 +53,7 @@ public class SkyboxManager : MonoBehaviour
         RenderSettings.skybox = null;
     }
 
-    void Update()
-    {
-        //
-        // For Windows
-        //
-        if (Application.platform == RuntimePlatform.WindowsPlayer ||
-            Application.platform == RuntimePlatform.WebGLPlayer ||
-            Application.platform == RuntimePlatform.WindowsEditor)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                NextSkybox();
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                PrevSkybox();
-            }
-        }
 
-
-    }
 
     public void NextSkybox()
     {
@@ -80,6 +66,12 @@ public class SkyboxManager : MonoBehaviour
         --index;
         if (index < 0)
             index = skybox.Count - 1;
+        StartCoroutine(ExecuteBlend(blendTimeSeconds));
+    }
+
+    public void GotoSkybox(int _index)
+    {
+        index = _index % skybox.Count;
         StartCoroutine(ExecuteBlend(blendTimeSeconds));
     }
 
@@ -129,11 +121,11 @@ public class SkyboxManager : MonoBehaviour
 
         while (!www.downloadHandler.isDone)
         {
-            screenText.text = (www.downloadProgress * 100.0f).ToString() + "%";
+            ui.screenText.text = (www.downloadProgress * 100.0f).ToString() + "%";
             yield return null;
         }
 
-        screenText.enabled = false;
+        ui.screenText.enabled = false;
 
         if (www.isError)
         {
@@ -195,6 +187,7 @@ public class SkyboxManager : MonoBehaviour
                         m.shader = Shader.Find("Skybox/Cubemap");
                         skybox.Add(m);
 
+                        ui.AddSkyboxButton(skybox.Count - 1);
                     }
                     bundle.Unload(false);
                     yield break;
