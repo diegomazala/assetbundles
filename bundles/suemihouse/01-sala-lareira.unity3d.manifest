@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 2798863360
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 83c17f057f28788644be1edd18a619d0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2647da76b7c2a83bec3b2e630339714c
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assets_Temp_8k/01_SalaLareira.mat
+Dependencies: []

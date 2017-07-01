@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 481046635
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: efb794d21cd11b21fc448957159b2ee4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2647da76b7c2a83bec3b2e630339714c
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assets_Temp_8k/06_SalaTv_01.mat
+Dependencies: []
