@@ -127,7 +127,7 @@ public class SkyboxManager : MonoBehaviour
 
         ui.screenText.enabled = false;
 
-        if (www.isError)
+        if (www.isNetworkError)
         {
             Debug.Log(www.error);
         }
@@ -171,7 +171,7 @@ public class SkyboxManager : MonoBehaviour
         {
             yield return www.Send();
 
-            if (!www.isError)
+            if (!www.isNetworkError)
             {
                 AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
 
