@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 3984351254
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 33e67682ce23a1856dcc6d328744f5ea
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2647da76b7c2a83bec3b2e630339714c
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+Assets:
+- Assets/SuemiHouse-Ansel/Mesa.mat
+Dependencies: []

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2798863360
+CRC: 2454405567
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 83c17f057f28788644be1edd18a619d0
+    Hash: 761954077141fd00d8c7c650066592c5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2647da76b7c2a83bec3b2e630339714c
@@ -16,5 +16,5 @@ ClassTypes:
 - Class: 89
   Script: {instanceID: 0}
 Assets:
-- Assets/Assets_Temp_8k/01_SalaLareira.mat
+- Assets/SuemiHouse-Ansel/Sala_Lareira.mat
 Dependencies: []

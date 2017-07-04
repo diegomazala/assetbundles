@@ -1,13 +1,13 @@
 ManifestFileVersion: 0
-CRC: 1431794277
+CRC: 4130029454
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: 01-sala-lareira.unity3d
+      Name: 02-sala-tv.unity3d
       Dependencies: {}
     Info_1:
-      Name: 02-mesa.unity3d
+      Name: 01-sala-lareira.unity3d
       Dependencies: {}
     Info_2:
-      Name: 03-sala-tv.unity3d
+      Name: 03-mesa.unity3d
       Dependencies: {}
