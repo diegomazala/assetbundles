@@ -28,6 +28,13 @@ class AssetDownloader : MonoBehaviour
         StartCoroutine(GetAssetBundle_GameObject(GameObjectAssetBundleUrl, GameObjectAssetName));
     }
 
+    public void DownloadGameObject(string assetFileName)
+    {
+
+        Debug.Log("DownloadGameObject: " + assetFileName);
+        //StartCoroutine(GetAssetBundle_GameObject(GameObjectAssetBundleUrl, GameObjectAssetName));
+    }
+
     public void DownloadSkybox()
     {
         StartCoroutine(GetAssetBundle_Skybox(SkyboxAssetBundleUrl, SkyboxAssetName));
