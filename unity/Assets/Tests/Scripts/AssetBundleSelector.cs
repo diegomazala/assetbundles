@@ -36,7 +36,9 @@ public class AssetBundleSelector : MonoBehaviour
         // if all the dialogs will be using the same filters
         SimpleFileBrowser.FileBrowser.SetFilters(
             true,
-            new SimpleFileBrowser.FileBrowser.Filter("Asset Bundles", ".unity3d"));
+            new SimpleFileBrowser.FileBrowser.Filter("Unity Bundles", ".unity3d"),
+            new SimpleFileBrowser.FileBrowser.Filter("Scene Bundles", ".scene"),
+            new SimpleFileBrowser.FileBrowser.Filter("Game Object Bundles", ".gobj"));
 
 
         // Set default filter that is selected when the dialog is shown (optional)

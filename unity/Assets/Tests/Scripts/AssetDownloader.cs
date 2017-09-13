@@ -12,7 +12,7 @@ class AssetDownloader : MonoBehaviour
     public string ScenesAssetName = "scene.unity3d";
     public string[] ScenesAssetPaths;
 
-    public GameObject assetInstantiated;
+    public GameObject assetInstantiated = null;
 
     private AssetBundle assetBundle = null;
     
@@ -23,16 +23,53 @@ class AssetDownloader : MonoBehaviour
             assetBundle.Unload(true);
     }
 
+    public void DownloadAsset(string assetFileName)
+    {
+        if (assetInstantiated)
+        {
+            Destroy(assetInstantiated);
+            assetInstantiated = null;
+        }
+
+        string assetName = System.IO.Path.GetFileNameWithoutExtension(assetFileName);
+        string extension = System.IO.Path.GetExtension(assetFileName);
+
+        if (extension == ".scene")
+        {
+            StartCoroutine(GetAssetBundle_Scene(assetFileName, assetName));
+        }
+        else if (extension == ".gobj")
+        {
+            StartCoroutine(GetAssetBundle_GameObject(assetFileName, assetName));
+        }
+        else if (extension == ".unity3d")
+        {
+            StartCoroutine(GetAssetBundle_GameObject(assetFileName, assetName));
+        }
+
+        
+    }
+
     public void DownloadGameObject()
     {
+        if (assetInstantiated)
+        {
+            Destroy(assetInstantiated);
+            assetInstantiated = null;
+        }
+
         StartCoroutine(GetAssetBundle_GameObject(GameObjectAssetBundleUrl, GameObjectAssetName));
     }
 
     public void DownloadGameObject(string assetFileName)
     {
+        if (assetInstantiated)
+        {
+            Destroy(assetInstantiated);
+            assetInstantiated = null;
+        }
 
-        Debug.Log("DownloadGameObject: " + assetFileName);
-        //StartCoroutine(GetAssetBundle_GameObject(GameObjectAssetBundleUrl, GameObjectAssetName));
+        StartCoroutine(GetAssetBundle_GameObject(assetFileName, System.IO.Path.GetFileNameWithoutExtension(assetFileName)));
     }
 
     public void DownloadSkybox()
@@ -101,7 +138,14 @@ class AssetDownloader : MonoBehaviour
         {
             assetBundle = DownloadHandlerAssetBundle.GetContent(www);
             ScenesAssetPaths = assetBundle.GetAllScenePaths();
-            //assetInstantiated = Instantiate(assetBundle.LoadAsset<GameObject>(assetName));
+
+            foreach (var scene_name in ScenesAssetPaths)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(
+                    //scene_name,
+                    System.IO.Path.GetFileNameWithoutExtension(scene_name),
+                    UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            }
             assetBundle.Unload(false);
         }
 
