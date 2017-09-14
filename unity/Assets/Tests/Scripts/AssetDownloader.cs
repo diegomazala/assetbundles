@@ -15,7 +15,9 @@ class AssetDownloader : MonoBehaviour
     public GameObject assetInstantiated = null;
 
     private AssetBundle assetBundle = null;
-    
+
+    public UnityEngine.Events.UnityEvent OnBeginAssetDownload;
+    public UnityEngine.Events.UnityEvent OnEndAssetDownload;
 
     void OnDisable()
     {
@@ -25,11 +27,11 @@ class AssetDownloader : MonoBehaviour
 
     public void DownloadAsset(string assetFileName)
     {
-        if (assetInstantiated)
-        {
-            Destroy(assetInstantiated);
-            assetInstantiated = null;
-        }
+        //if (assetInstantiated)
+        //{
+        //    Destroy(assetInstantiated);
+        //    assetInstantiated = null;
+        //}
 
         string assetName = System.IO.Path.GetFileNameWithoutExtension(assetFileName);
         string extension = System.IO.Path.GetExtension(assetFileName);
@@ -52,22 +54,22 @@ class AssetDownloader : MonoBehaviour
 
     public void DownloadGameObject()
     {
-        if (assetInstantiated)
-        {
-            Destroy(assetInstantiated);
-            assetInstantiated = null;
-        }
+        //if (assetInstantiated)
+        //{
+        //    Destroy(assetInstantiated);
+        //    assetInstantiated = null;
+        //}
 
         StartCoroutine(GetAssetBundle_GameObject(GameObjectAssetBundleUrl, GameObjectAssetName));
     }
 
     public void DownloadGameObject(string assetFileName)
     {
-        if (assetInstantiated)
-        {
-            Destroy(assetInstantiated);
-            assetInstantiated = null;
-        }
+        //if (assetInstantiated)
+        //{
+        //    Destroy(assetInstantiated);
+        //    assetInstantiated = null;
+        //}
 
         StartCoroutine(GetAssetBundle_GameObject(assetFileName, System.IO.Path.GetFileNameWithoutExtension(assetFileName)));
     }
@@ -85,6 +87,8 @@ class AssetDownloader : MonoBehaviour
 
     IEnumerator GetAssetBundle_Skybox(string assetBundleUrl, string assetName)
     {
+        OnBeginAssetDownload.Invoke();
+
         UnityWebRequest www = UnityWebRequest.GetAssetBundle(assetBundleUrl);
         yield return www.Send();
 
@@ -104,10 +108,13 @@ class AssetDownloader : MonoBehaviour
             assetBundle.Unload(false);
         }
 
+        OnEndAssetDownload.Invoke();
     }
 
     IEnumerator GetAssetBundle_GameObject(string assetBundleUrl, string assetName)
     {
+        OnBeginAssetDownload.Invoke();
+
         UnityWebRequest www = UnityWebRequest.GetAssetBundle(assetBundleUrl);
         yield return www.Send();
 
@@ -122,11 +129,14 @@ class AssetDownloader : MonoBehaviour
             assetBundle.Unload(false);
         }
 
+        OnEndAssetDownload.Invoke();
     }
 
 
     IEnumerator GetAssetBundle_Scene(string assetBundleUrl, string assetName)
     {
+        OnBeginAssetDownload.Invoke();
+
         UnityWebRequest www = UnityWebRequest.GetAssetBundle(assetBundleUrl);
         yield return www.Send();
 
@@ -149,5 +159,6 @@ class AssetDownloader : MonoBehaviour
             assetBundle.Unload(false);
         }
 
+        OnEndAssetDownload.Invoke();
     }
 }

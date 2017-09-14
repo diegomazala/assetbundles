@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class AssetBundleSelector : MonoBehaviour
 {
-    public string[] subFolders;
     private int currentSelected = 0;
 
     public UnityEngine.UI.InputField rootFolderInputField;
